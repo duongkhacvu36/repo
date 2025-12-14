@@ -1,3 +1,3 @@
 - https://duongkhacvu36.github.io/repo
-- https://drive.google.com/file/d/1GzgZcs-gDWcToPioDT9jDu8BQItqCYzM/view?usp=drivesdk
-- https://drive.google.com/file/d/1jjxoFPTtsPaK4ksgQ0c8mLWG3vnjQV3J/view?usp=drivesdk
+- https://drive.google.com/file/d/1bwZ_PQ_i1xzD9CYjPmhh5sBsFfaWarr5/view?usp=drivesdk
+- https://drive.google.com/file/d/1etTfeLhMjMGxg5YL0QPdWMKYwiOUHwZx/view?usp=drivesdk
