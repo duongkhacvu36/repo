@@ -3,107 +3,132 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Thư mục & Tệp</title>
+<title></title>
 
 <style>
+:root {
+  /* Màu sắc tự động theo chế độ thiết bị */
+  color-scheme: light dark;
+}
+
 body {
   margin: 0;
-  font-family: "Inter", sans-serif;
-  background: #000; /* OLED true black */
-  color: #f5f5f5;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  background: light-dark(#ffffff, #000000);
+  color: light-dark(#1a2639, #f0f0f0);
   display: flex;
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
-  padding: 20px 10px 60px;
+  padding: 20px 10px 20px;
 }
+
 .container {
   width: 100%;
   max-width: 900px;
 }
-h1 { display: none; }
+
+/* ===== ẨN TIÊU ĐỀ ===== */
+.section-title {
+  display: none;
+}
 
 /* ===== BẢNG ===== */
 table {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.95rem;
-  margin-top: 10px;
+  margin-top: 0;
+  background: light-dark(#ffffff, #0a0a0a);
+  box-shadow: light-dark(0 2px 8px rgba(0,0,0,0.05), 0 2px 8px rgba(0,0,0,0.3));
+  border-radius: 12px;
+  overflow: hidden;
 }
+
 th, td {
-  padding: 12px 8px;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding: 14px 12px;
+  border-bottom: 1px solid light-dark(#eaeef2, #1a1a1a);
   vertical-align: middle;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-td { color: #ddd; }
+
+td {
+  color: light-dark(#1a2639, #e0e0e0);
+}
+
 thead { display: none; }
 
-/* ===== CĂN GIỮA DÒNG TRỐNG ===== */
+/* ===== CĂN GIỮA DÒNG TRỐNG - GIỮ NGUYÊN TEXT ===== */
 .empty {
   text-align: center !important;
   vertical-align: middle;
-  color: #666;
-  padding: 20px;
+  color: light-dark(#7f8c8d, #666666);
+  padding: 40px;
   height: 60px;
   width: 100%;
   display: table-cell;
-}
-
-/* ===== PHẦN MỤC ===== */
-.section-title {
-  color: rgb(190,140,255);
-  margin: 20px 0 10px;
-  font-weight: 600;
-  border-bottom: 2px solid #1a1a1a;
-  padding-bottom: 6px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  text-shadow: 0 0 6px rgba(190,140,255,0.5);
-  transition: color 0.25s ease;
+  font-style: italic;
+  background: light-dark(#f9f9f9, #0f0f0f);
 }
 
 /* ===== CỘT KÍCH THƯỚC & NÚT BÊN PHẢI ===== */
 tr td:nth-child(2),
 tr td:last-child {
   text-align: right;
-  padding-right: 0;
+  padding-right: 12px;
 }
 
 /* ===== NÚT HÀNH ĐỘNG ===== */
 .action-buttons {
   display: flex;
   justify-content: flex-end;
-  gap: 6px;
+  gap: 8px;
   width: 100%;
 }
+
 .action-btn {
   flex: 1 1 70px;
   max-width: 80px;
   text-align: center;
-  padding: 6px 0;
-  border-radius: 6px;
-  background: #111;
-  color: rgb(190,140,255);
+  padding: 8px 0;
+  border-radius: 8px;
+  background: light-dark(#f0f4f8, #1a1a1a);
+  color: light-dark(#0066cc, #66aaff);
   text-decoration: none;
-  border: 1px solid rgba(190,140,255,0.3);
-  transition: all 0.25s ease;
+  border: 1px solid light-dark(#d0d9e6, #333333);
+  transition: all 0.2s ease;
   font-size: 0.9rem;
   box-sizing: border-box;
-  text-shadow: 0 0 6px rgba(190,140,255,0.4);
+  font-weight: 500;
+  cursor: pointer;
 }
+
 .action-btn:hover {
-  background: rgb(190,140,255);
-  color: #000;
-  box-shadow: 0 0 8px rgba(190,140,255,0.6);
+  background: light-dark(#0066cc, #3388ff);
+  color: white;
+  border-color: light-dark(#0066cc, #3388ff);
+  box-shadow: 0 2px 8px light-dark(rgba(0,102,204,0.3), rgba(51,136,255,0.3));
 }
+
 .toggle-btn.active {
-  background: rgb(190,140,255);
-  color: #000;
-  box-shadow: 0 0 8px rgba(190,140,255,0.6);
+  background: light-dark(#0066cc, #3388ff);
+  color: white;
+  border-color: light-dark(#0066cc, #3388ff);
+  box-shadow: 0 2px 8px light-dark(rgba(0,102,204,0.3), rgba(51,136,255,0.3));
+}
+
+/* ===== TÊN TỆP TIN ===== */
+td:first-child {
+  font-weight: 500;
+  color: light-dark(#1a2639, #f0f0f0);
+}
+
+/* ===== ICON THEO MODE ===== */
+td:first-child::before {
+  content: "📄 ";
+  filter: light-dark(none, brightness(0.9));
 }
 
 /* ===== POPUP XEM TRƯỚC ===== */
@@ -114,7 +139,7 @@ tr td:last-child {
   width: 100vw;
   height: 100vh;
   transform: translate(-50%, -50%);
-  background: rgba(0,0,0,0.98);
+  background: rgba(0,0,0,0.85);
   display: none;
   align-items: center;
   justify-content: center;
@@ -122,6 +147,7 @@ tr td:last-child {
   z-index: 1000;
   animation: fadeIn 0.25s ease;
 }
+
 #previewContent {
   display: flex;
   align-items: center;
@@ -129,11 +155,13 @@ tr td:last-child {
   max-width: 90%;
   max-height: 80%;
   overflow: hidden;
-  border-radius: 8px;
-  background: #050505;
-  padding: 10px;
+  border-radius: 16px;
+  background: light-dark(#ffffff, #0a0a0a);
+  padding: 16px;
   box-sizing: border-box;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
 }
+
 #previewContent img,
 #previewContent video,
 #previewContent iframe {
@@ -142,49 +170,35 @@ tr td:last-child {
   max-height: 100%;
   object-fit: contain;
   margin: auto;
-  border: 2px solid #222;
-  border-radius: 8px;
+  border-radius: 12px;
 }
+
 #previewContent pre {
-  background: #050505;
-  color: #eee;
+  background: light-dark(#f5f5f5, #1a1a1a);
+  color: light-dark(#1a2639, #e0e0e0);
   padding: 20px;
-  border-radius: 8px;
+  border-radius: 12px;
   overflow-x: auto;
   white-space: pre;
-  font-family: "Consolas", monospace;
+  font-family: "Consolas", "Monaco", monospace;
   font-size: 0.9rem;
-  border: 1px solid #222;
+  border: 1px solid light-dark(#eaeef2, #333333);
+  max-height: 70vh;
 }
+
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
 }
 
-/* ===== CHÂN TRANG ===== */
+/* ===== ẨN FOOTER ===== */
 footer {
-  position: fixed;
-  bottom: 10px;
-  width: 100%;
-  text-align: center;
-  font-size: 0.85rem;
-  color: #555;
-  letter-spacing: 0.5px;
-  user-select: none;
-}
-footer span {
-  color: rgb(190,140,255);
-  text-shadow: 0 0 6px rgba(190,140,255,0.5);
-  transition: color 0.3s ease, text-shadow 0.3s ease;
-}
-footer span:hover {
-  color: rgb(220,170,255);
-  text-shadow: 0 0 10px rgba(190,140,255,0.8);
+  display: none;
 }
 
 /* ===== MOBILE ===== */
 @media (max-width: 700px) {
-  td { padding: 10px 6px; }
+  td { padding: 12px 8px; }
   .action-btn { font-size: 0.85rem; }
 }
 </style>
@@ -192,14 +206,7 @@ footer span:hover {
 
 <body>
 <main class="container">
-  <div class="section-title">📁 Thư mục</div>
-  <table id="folderTable">
-    <tbody id="foldersBody">
-      <tr><td colspan="3" class="empty">Không có thư mục</td></tr>
-    </tbody>
-  </table>
-
-  <div class="section-title">📄 Tệp tin</div>
+  <!-- Đã xóa dòng "Tệp tin" -->
   <table id="filesTable">
     <tbody id="filesBody">
       <tr><td colspan="3" class="empty">Đang tải...</td></tr>
@@ -209,9 +216,7 @@ footer span:hover {
 
 <div id="previewPopup"><div id="previewContent"></div></div>
 
-<footer>
-  Cre: <span>Dương Khắc Vũ © 2025</span>
-</footer>
+<!-- Đã xóa footer -->
 
 <script>
 function getRepoInfo() {
@@ -224,7 +229,6 @@ function getRepoInfo() {
 
 const { owner, repo } = getRepoInfo();
 const branch = "main";
-const foldersBody = document.getElementById("foldersBody");
 const filesBody = document.getElementById("filesBody");
 const cache = {};
 
@@ -239,20 +243,16 @@ async function apiList(path='') {
 }
 
 function rawUrl(path){ return `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path}`; }
-function formatBytes(b){ if(!b) return '-'; const k=1024, s=['B','KB','MB','GB']; const i=Math.floor(Math.log(b)/Math.log(k)); return (b/Math.pow(k,i)).toFixed(2)+' '+s[i]; }
 
-function renderList(list) {
-  const folders = list.filter(f => f.type === 'dir');
+function formatBytes(b){
+  if(!b) return '-';
+  const k=1024, s=['B','KB','MB','GB'];
+  const i=Math.floor(Math.log(b)/Math.log(k));
+  return (b/Math.pow(k,i)).toFixed(2)+' '+s[i];
+}
+
+function renderFiles(list) {
   const files = list.filter(f => f.type !== 'dir');
-
-  foldersBody.innerHTML = folders.length ? folders.map(f => `
-    <tr>
-      <td>📁 <a href="#" data-dir="${f.path}" class="dir">${f.name}</a></td>
-      <td>-</td>
-      <td class="action-buttons">
-        <button class="action-btn" onclick="loadFiles('${f.path}')">Mở</button>
-      </td>
-    </tr>`).join('') : `<tr><td colspan="3" class="empty">Không có thư mục</td></tr>`;
 
   filesBody.innerHTML = files.length ? files.map(f => {
     const url = rawUrl(f.path);
@@ -266,18 +266,13 @@ function renderList(list) {
         </td>
       </tr>`;
   }).join('') : `<tr><td colspan="3" class="empty">Không có tệp</td></tr>`;
-
-  document.querySelectorAll('.dir').forEach(a => a.onclick = e => {
-    e.preventDefault();
-    loadFiles(a.dataset.dir);
-  });
 }
 
 async function loadFiles(path='') {
-  filesBody.innerHTML='<tr><td colspan="3" class="empty">⏳ Đang tải...</td></tr>';
+  filesBody.innerHTML='<tr><td colspan="3" class="empty">Đang tải...</td></tr>';
   try {
     const data = await apiList(path);
-    renderList(Array.isArray(data) ? data : [data]);
+    renderFiles(Array.isArray(data) ? data : [data]);
   } catch(e) {
     filesBody.innerHTML=`<tr><td colspan="3" class="empty">Lỗi: ${e.message}</td></tr>`;
   }
@@ -301,17 +296,21 @@ async function togglePreview(btn, url, name) {
   const ext = name.split('.').pop().toLowerCase();
   let html = "";
 
-  if (["jpg","jpeg","png","gif","webp"].includes(ext)) {
+  if (["jpg","jpeg","png","gif","webp","svg","bmp"].includes(ext)) {
     html = `<img src="${url}" alt="${name}">`;
-  } else if (["mp4","webm"].includes(ext)) {
+  } else if (["mp4","webm","avi","mov","mkv"].includes(ext)) {
     html = `<video src="${url}" controls autoplay></video>`;
   } else if (["pdf"].includes(ext)) {
-    html = `<iframe src="${url}" width="90%" height="80%"></iframe>`;
-  } else if (["txt","html","htm","php","js","css","json","md","xml","c","cpp","py","sh","bat","ini"].includes(ext)) {
-    const text = await fetch(url).then(r=>r.text());
-    html = `<pre>${escapeHtml(text)}</pre>`;
+    html = `<iframe src="${url}" width="90%" height="80%" style="border: none;"></iframe>`;
+  } else if (["txt","html","htm","php","js","css","json","md","xml","c","cpp","py","sh","bat","ini","log","conf","yml","yaml"].includes(ext)) {
+    try {
+      const text = await fetch(url).then(r=>r.text());
+      html = `<pre>${escapeHtml(text)}</pre>`;
+    } catch {
+      html = `<iframe src="${url}" width="90%" height="80%"></iframe>`;
+    }
   } else {
-    html = `<iframe src="${url}" width="90%" height="80%"></iframe>`;
+    html = `<iframe src="${url}" width="90%" height="80%" style="border: none;"></iframe>`;
   }
 
   content.innerHTML = html;
