@@ -7,7 +7,6 @@
 
 <style>
 :root {
-  /* Màu sắc tự động theo chế độ thiết bị */
   color-scheme: light dark;
 }
 
@@ -28,12 +27,10 @@ body {
   max-width: 900px;
 }
 
-/* ===== ẨN TIÊU ĐỀ ===== */
 .section-title {
   display: none;
 }
 
-/* ===== BẢNG ===== */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -60,7 +57,6 @@ td {
 
 thead { display: none; }
 
-/* ===== CĂN GIỮA DÒNG TRỐNG - GIỮ NGUYÊN TEXT ===== */
 .empty {
   text-align: center !important;
   vertical-align: middle;
@@ -73,14 +69,26 @@ thead { display: none; }
   background: light-dark(#f9f9f9, #0f0f0f);
 }
 
-/* ===== CỘT KÍCH THƯỚC & NÚT BÊN PHẢI ===== */
-tr td:nth-child(2),
+/* Xóa icon trước tên tệp */
+td:first-child::before {
+  content: "" !important;
+  display: none !important;
+}
+
+/* Cột kích thước */
+tr td:nth-child(2) {
+  text-align: right;
+  padding-right: 12px;
+  min-width: 80px;
+}
+
+/* Cột nút bên phải */
 tr td:last-child {
   text-align: right;
   padding-right: 12px;
+  width: 140px; /* Fixed width cho cột nút */
 }
 
-/* ===== NÚT HÀNH ĐỘNG ===== */
 .action-buttons {
   display: flex;
   justify-content: flex-end;
@@ -89,8 +97,7 @@ tr td:last-child {
 }
 
 .action-btn {
-  flex: 1 1 70px;
-  max-width: 80px;
+  flex: 0 0 60px; /* Fixed width 60px */
   text-align: center;
   padding: 8px 0;
   border-radius: 8px;
@@ -103,6 +110,7 @@ tr td:last-child {
   box-sizing: border-box;
   font-weight: 500;
   cursor: pointer;
+  display: inline-block;
 }
 
 .action-btn:hover {
@@ -119,19 +127,12 @@ tr td:last-child {
   box-shadow: 0 2px 8px light-dark(rgba(0,102,204,0.3), rgba(51,136,255,0.3));
 }
 
-/* ===== TÊN TỆP TIN ===== */
 td:first-child {
   font-weight: 500;
   color: light-dark(#1a2639, #f0f0f0);
+  max-width: 400px;
 }
 
-/* ===== ICON THEO MODE ===== */
-td:first-child::before {
-  content: "📄 ";
-  filter: light-dark(none, brightness(0.9));
-}
-
-/* ===== POPUP XEM TRƯỚC ===== */
 #previewPopup {
   position: fixed;
   top: 50%;
@@ -191,22 +192,20 @@ td:first-child::before {
   to { opacity: 1; }
 }
 
-/* ===== ẨN FOOTER ===== */
 footer {
   display: none;
 }
 
-/* ===== MOBILE ===== */
 @media (max-width: 700px) {
   td { padding: 12px 8px; }
-  .action-btn { font-size: 0.85rem; }
+  .action-btn { font-size: 0.85rem; flex: 0 0 55px; }
+  tr td:last-child { width: 120px; }
 }
 </style>
 </head>
 
 <body>
 <main class="container">
-  <!-- Đã xóa dòng "Tệp tin" -->
   <table id="filesTable">
     <tbody id="filesBody">
       <tr><td colspan="3" class="empty">Đang tải...</td></tr>
@@ -215,8 +214,6 @@ footer {
 </main>
 
 <div id="previewPopup"><div id="previewContent"></div></div>
-
-<!-- Đã xóa footer -->
 
 <script>
 function getRepoInfo() {
@@ -258,7 +255,7 @@ function renderFiles(list) {
     const url = rawUrl(f.path);
     return `
       <tr>
-        <td>📄 ${f.name}</td>
+        <td>${f.name}</td>
         <td>${formatBytes(f.size)}</td>
         <td class="action-buttons">
           <a href="${url}" download class="action-btn">Tải</a>
