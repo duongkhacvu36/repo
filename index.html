@@ -19,31 +19,33 @@ body {
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
-  padding: 20px 10px 20px;
+  padding: 0; /* Xóa padding để sát mép */
 }
 
 .container {
   width: 100%;
-  max-width: 900px;
+  max-width: 100%; /* Full width */
+  padding: 0; /* Xóa padding */
 }
 
 .section-title {
   display: none;
 }
 
+/* ===== BẢNG CĂN ĐỀU 2 BÊN MÉP ===== */
 table {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.95rem;
   margin-top: 0;
   background: light-dark(#ffffff, #0a0a0a);
-  box-shadow: light-dark(0 2px 8px rgba(0,0,0,0.05), 0 2px 8px rgba(0,0,0,0.3));
-  border-radius: 12px;
+  box-shadow: none; /* Bỏ shadow để sát mép */
+  border-radius: 0; /* Bỏ bo góc */
   overflow: hidden;
 }
 
 th, td {
-  padding: 14px 12px;
+  padding: 16px 20px; /* Tăng padding cho đẹp */
   border-bottom: 1px solid light-dark(#eaeef2, #1a1a1a);
   vertical-align: middle;
   white-space: nowrap;
@@ -51,22 +53,29 @@ th, td {
   text-overflow: ellipsis;
 }
 
-td {
-  color: light-dark(#1a2639, #e0e0e0);
+/* Cột đầu tiên - Tên file */
+td:first-child {
+  padding-left: 20px;
+  font-weight: 500;
+  color: light-dark(#1a2639, #f0f0f0);
+  max-width: none; /* Bỏ giới hạn width */
+  width: auto;
 }
 
-thead { display: none; }
+/* Cột thứ hai - Kích thước */
+td:nth-child(2) {
+  text-align: right;
+  padding-right: 20px;
+  min-width: 100px;
+  width: 100px;
+}
 
-.empty {
-  text-align: center !important;
-  vertical-align: middle;
-  color: light-dark(#7f8c8d, #666666);
-  padding: 40px;
-  height: 60px;
-  width: 100%;
-  display: table-cell;
-  font-style: italic;
-  background: light-dark(#f9f9f9, #0f0f0f);
+/* Cột cuối cùng - Nút */
+td:last-child {
+  text-align: right;
+  padding-right: 20px;
+  width: 160px; /* Tăng width cho nút */
+  min-width: 160px;
 }
 
 /* Xóa icon trước tên tệp */
@@ -75,38 +84,25 @@ td:first-child::before {
   display: none !important;
 }
 
-/* Cột kích thước */
-tr td:nth-child(2) {
-  text-align: right;
-  padding-right: 12px;
-  min-width: 80px;
-}
-
-/* Cột nút bên phải */
-tr td:last-child {
-  text-align: right;
-  padding-right: 12px;
-  width: 140px; /* Fixed width cho cột nút */
-}
-
+/* Action buttons */
 .action-buttons {
   display: flex;
   justify-content: flex-end;
-  gap: 8px;
+  gap: 12px; /* Tăng gap */
   width: 100%;
 }
 
 .action-btn {
-  flex: 0 0 60px; /* Fixed width 60px */
+  flex: 0 0 70px; /* Tăng width nút */
   text-align: center;
   padding: 8px 0;
-  border-radius: 8px;
+  border-radius: 6px;
   background: light-dark(#f0f4f8, #1a1a1a);
   color: light-dark(#0066cc, #66aaff);
   text-decoration: none;
   border: 1px solid light-dark(#d0d9e6, #333333);
   transition: all 0.2s ease;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   box-sizing: border-box;
   font-weight: 500;
   cursor: pointer;
@@ -127,12 +123,21 @@ tr td:last-child {
   box-shadow: 0 2px 8px light-dark(rgba(0,102,204,0.3), rgba(51,136,255,0.3));
 }
 
-td:first-child {
-  font-weight: 500;
-  color: light-dark(#1a2639, #f0f0f0);
-  max-width: 400px;
+/* Empty state */
+.empty {
+  text-align: center !important;
+  vertical-align: middle;
+  color: light-dark(#7f8c8d, #666666);
+  padding: 60px 20px;
+  height: 60px;
+  width: 100%;
+  display: table-cell;
+  font-style: italic;
+  background: light-dark(#f9f9f9, #0f0f0f);
+  font-size: 1rem;
 }
 
+/* Popup giữ nguyên */
 #previewPopup {
   position: fixed;
   top: 50%;
@@ -196,10 +201,37 @@ footer {
   display: none;
 }
 
+/* Mobile */
 @media (max-width: 700px) {
-  td { padding: 12px 8px; }
-  .action-btn { font-size: 0.85rem; flex: 0 0 55px; }
-  tr td:last-child { width: 120px; }
+  th, td {
+    padding: 12px 16px;
+  }
+  
+  td:first-child {
+    padding-left: 16px;
+  }
+  
+  td:nth-child(2) {
+    padding-right: 16px;
+    min-width: 80px;
+    width: 80px;
+  }
+  
+  td:last-child {
+    padding-right: 16px;
+    width: 140px;
+    min-width: 140px;
+  }
+  
+  .action-btn {
+    flex: 0 0 65px;
+    font-size: 0.9rem;
+    padding: 6px 0;
+  }
+  
+  .action-buttons {
+    gap: 8px;
+  }
 }
 </style>
 </head>
