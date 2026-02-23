@@ -12,6 +12,8 @@
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
@@ -23,7 +25,6 @@ body {
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
-  padding: 0;
   width: 100%;
   overflow-x: hidden;
 }
@@ -31,7 +32,6 @@ body {
 .container {
   width: 100%;
   max-width: 100%;
-  padding: 0;
 }
 
 .section-title {
@@ -42,50 +42,55 @@ body {
 table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 16px; /* Kích thước chữ cố định cho mobile */
-  margin-top: 0;
+  font-size: 16px;
   background: light-dark(#ffffff, #0a0a0a);
-  border-radius: 0;
-  overflow: hidden;
-  table-layout: fixed; /* Fixed layout để kiểm soát độ rộng cột */
+  table-layout: fixed;
 }
 
-/* Phân bổ độ rộng cột */
-thead, tfoot {
-  display: none;
+/* Phân bổ độ rộng cột hợp lý */
+colgroup {
+  display: table-column-group;
 }
 
-/* Cột tên file - chiếm phần còn lại */
+col.col-name {
+  width: 50%; /* Tên file chiếm 50% */
+}
+
+col.col-size {
+  width: 25%; /* Dung lượng chiếm 25% */
+}
+
+col.col-actions {
+  width: 25%; /* Nút chiếm 25% */
+}
+
+/* Cột tên file */
 td:first-child {
-  width: auto;
-  padding: 14px 0 14px 16px;
+  padding: 16px 0 16px 20px;
   font-weight: 500;
   color: light-dark(#1a2639, #f0f0f0);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   border-bottom: 1px solid light-dark(#eaeef2, #1a1a1a);
+  text-align: left;
 }
 
-/* Cột kích thước - width cố định */
+/* Cột dung lượng - HIỂN THỊ RÕ RÀNG */
 td:nth-child(2) {
-  width: 80px;
-  min-width: 80px;
-  max-width: 80px;
-  padding: 14px 0;
-  text-align: right;
+  padding: 16px 0;
+  text-align: left; /* Căn trái để dễ đọc */
   color: light-dark(#4a5568, #a0a0a0);
-  font-size: 14px;
+  font-size: 15px;
+  font-weight: 500;
   white-space: nowrap;
   border-bottom: 1px solid light-dark(#eaeef2, #1a1a1a);
+  padding-left: 10px; /* Thêm padding trái */
 }
 
-/* Cột nút - width cố định */
+/* Cột nút */
 td:last-child {
-  width: 130px;
-  min-width: 130px;
-  max-width: 130px;
-  padding: 10px 16px 10px 0;
+  padding: 12px 20px 12px 0;
   text-align: right;
   border-bottom: 1px solid light-dark(#eaeef2, #1a1a1a);
 }
@@ -100,12 +105,12 @@ td:first-child::before {
 .action-buttons {
   display: flex;
   justify-content: flex-end;
-  gap: 8px;
+  gap: 10px;
   width: 100%;
 }
 
 .action-btn {
-  flex: 0 0 60px;
+  flex: 0 0 70px;
   text-align: center;
   padding: 8px 0;
   border-radius: 8px;
@@ -125,14 +130,12 @@ td:first-child::before {
   background: light-dark(#0066cc, #3388ff);
   color: white;
   border-color: light-dark(#0066cc, #3388ff);
-  box-shadow: 0 2px 8px light-dark(rgba(0,102,204,0.3), rgba(51,136,255,0.3));
 }
 
 .toggle-btn.active {
   background: light-dark(#0066cc, #3388ff);
   color: white;
   border-color: light-dark(#0066cc, #3388ff);
-  box-shadow: 0 2px 8px light-dark(rgba(0,102,204,0.3), rgba(51,136,255,0.3));
 }
 
 /* Empty state */
@@ -144,7 +147,6 @@ td:first-child::before {
   font-style: italic;
   background: light-dark(#f9f9f9, #0f0f0f);
   font-size: 16px;
-  width: auto !important;
 }
 
 /* Popup */
@@ -171,7 +173,6 @@ td:first-child::before {
   border-radius: 12px;
   background: light-dark(#ffffff, #0a0a0a);
   padding: 12px;
-  box-sizing: border-box;
 }
 
 #previewContent img,
@@ -195,91 +196,119 @@ td:first-child::before {
   word-wrap: break-word;
   font-family: "Consolas", monospace;
   font-size: 14px;
-  border: 1px solid light-dark(#eaeef2, #333333);
   max-height: 100%;
   width: 100%;
-  margin: 0;
 }
 
 footer {
   display: none;
 }
 
-/* ===== MOBILE OPTIMIZATION ===== */
-@media (max-width: 480px) {
-  /* Tăng kích thước chạm */
-  td {
-    padding-top: 16px !important;
-    padding-bottom: 16px !important;
+/* ===== MOBILE ===== */
+@media (max-width: 600px) {
+  /* Điều chỉnh độ rộng cột cho mobile */
+  col.col-name {
+    width: 45%;
   }
   
-  /* Cột tên file */
+  col.col-size {
+    width: 30%;
+  }
+  
+  col.col-actions {
+    width: 25%;
+  }
+  
   td:first-child {
-    padding-left: 12px;
+    padding-left: 16px;
     font-size: 15px;
   }
   
-  /* Cột kích thước */
   td:nth-child(2) {
-    width: 70px;
-    min-width: 70px;
-    max-width: 70px;
-    font-size: 13px;
-    padding-right: 0;
-  }
-  
-  /* Cột nút */
-  td:last-child {
-    width: 120px;
-    min-width: 120px;
-    max-width: 120px;
-    padding-right: 12px;
-  }
-  
-  /* Nút to hơn cho dễ bấm */
-  .action-btn {
-    flex: 0 0 55px;
-    padding: 10px 0;
     font-size: 14px;
-    border-radius: 10px;
+    padding-left: 8px;
+  }
+  
+  td:last-child {
+    padding-right: 16px;
+  }
+  
+  .action-btn {
+    flex: 0 0 65px;
+    padding: 8px 0;
+    font-size: 14px;
   }
   
   .action-buttons {
     gap: 6px;
   }
-  
-  /* Empty state */
-  .empty {
-    padding: 50px 16px;
-    font-size: 15px;
-  }
 }
 
-/* Màn hình rất nhỏ */
-@media (max-width: 360px) {
+@media (max-width: 480px) {
+  col.col-name {
+    width: 40%;
+  }
+  
+  col.col-size {
+    width: 30%;
+  }
+  
+  col.col-actions {
+    width: 30%;
+  }
+  
   td:first-child {
-    padding-left: 8px;
+    padding-left: 12px;
     font-size: 14px;
   }
   
   td:nth-child(2) {
-    width: 60px;
-    min-width: 60px;
-    max-width: 60px;
-    font-size: 12px;
+    font-size: 13px;
+    padding-left: 5px;
   }
   
   td:last-child {
-    width: 110px;
-    min-width: 110px;
-    max-width: 110px;
+    padding-right: 12px;
+  }
+  
+  .action-btn {
+    flex: 0 0 60px;
+    padding: 8px 0;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 360px) {
+  col.col-name {
+    width: 35%;
+  }
+  
+  col.col-size {
+    width: 30%;
+  }
+  
+  col.col-actions {
+    width: 35%;
+  }
+  
+  td:first-child {
+    padding-left: 8px;
+    font-size: 13px;
+  }
+  
+  td:nth-child(2) {
+    font-size: 12px;
+    padding-left: 3px;
+  }
+  
+  td:last-child {
     padding-right: 8px;
   }
   
   .action-btn {
-    flex: 0 0 52px;
-    padding: 8px 0;
-    font-size: 13px;
+    flex: 0 0 55px;
+    padding: 7px 0;
+    font-size: 12px;
   }
   
   .action-buttons {
@@ -292,6 +321,11 @@ footer {
 <body>
 <main class="container">
   <table id="filesTable">
+    <colgroup>
+      <col class="col-name">
+      <col class="col-size">
+      <col class="col-actions">
+    </colgroup>
     <tbody id="filesBody">
       <tr><td colspan="3" class="empty">Đang tải...</td></tr>
     </tbody>
