@@ -47,24 +47,22 @@ table {
   table-layout: fixed;
 }
 
-/* Phân bổ độ rộng cột hợp lý */
 colgroup {
   display: table-column-group;
 }
 
 col.col-name {
-  width: 50%; /* Tên file chiếm 50% */
+  width: 50%;
 }
 
 col.col-size {
-  width: 25%; /* Dung lượng chiếm 25% */
+  width: 25%;
 }
 
 col.col-actions {
-  width: 25%; /* Nút chiếm 25% */
+  width: 25%;
 }
 
-/* Cột tên file */
 td:first-child {
   padding: 16px 0 16px 20px;
   font-weight: 500;
@@ -76,32 +74,23 @@ td:first-child {
   text-align: left;
 }
 
-/* Cột dung lượng - HIỂN THỊ RÕ RÀNG */
 td:nth-child(2) {
   padding: 16px 0;
-  text-align: left; /* Căn trái để dễ đọc */
+  text-align: left;
   color: light-dark(#4a5568, #a0a0a0);
   font-size: 15px;
   font-weight: 500;
   white-space: nowrap;
   border-bottom: 1px solid light-dark(#eaeef2, #1a1a1a);
-  padding-left: 10px; /* Thêm padding trái */
+  padding-left: 10px;
 }
 
-/* Cột nút */
 td:last-child {
   padding: 12px 20px 12px 0;
   text-align: right;
   border-bottom: 1px solid light-dark(#eaeef2, #1a1a1a);
 }
 
-/* Xóa icon trước tên tệp */
-td:first-child::before {
-  content: "" !important;
-  display: none !important;
-}
-
-/* Action buttons */
 .action-buttons {
   display: flex;
   justify-content: flex-end;
@@ -138,7 +127,6 @@ td:first-child::before {
   border-color: light-dark(#0066cc, #3388ff);
 }
 
-/* Empty state */
 .empty {
   text-align: center !important;
   vertical-align: middle;
@@ -149,7 +137,7 @@ td:first-child::before {
   font-size: 16px;
 }
 
-/* Popup */
+/* ===== POPUP - ĐÃ SỬA LỖI ===== */
 #previewPopup {
   position: fixed;
   top: 0;
@@ -173,6 +161,7 @@ td:first-child::before {
   border-radius: 12px;
   background: light-dark(#ffffff, #0a0a0a);
   padding: 12px;
+  cursor: default; /* Con trỏ mặc định khi ở trong content */
 }
 
 #previewContent img,
@@ -184,6 +173,7 @@ td:first-child::before {
   object-fit: contain;
   margin: auto;
   border-radius: 8px;
+  pointer-events: auto; /* Cho phép tương tác với nội dung */
 }
 
 #previewContent pre {
@@ -198,122 +188,47 @@ td:first-child::before {
   font-size: 14px;
   max-height: 100%;
   width: 100%;
+  pointer-events: auto;
+  cursor: text;
 }
 
 footer {
   display: none;
 }
 
-/* ===== MOBILE ===== */
 @media (max-width: 600px) {
-  /* Điều chỉnh độ rộng cột cho mobile */
-  col.col-name {
-    width: 45%;
-  }
+  col.col-name { width: 45%; }
+  col.col-size { width: 30%; }
+  col.col-actions { width: 25%; }
   
-  col.col-size {
-    width: 30%;
-  }
-  
-  col.col-actions {
-    width: 25%;
-  }
-  
-  td:first-child {
-    padding-left: 16px;
-    font-size: 15px;
-  }
-  
-  td:nth-child(2) {
-    font-size: 14px;
-    padding-left: 8px;
-  }
-  
-  td:last-child {
-    padding-right: 16px;
-  }
-  
-  .action-btn {
-    flex: 0 0 65px;
-    padding: 8px 0;
-    font-size: 14px;
-  }
-  
-  .action-buttons {
-    gap: 6px;
-  }
+  td:first-child { padding-left: 16px; font-size: 15px; }
+  td:nth-child(2) { font-size: 14px; padding-left: 8px; }
+  td:last-child { padding-right: 16px; }
+  .action-btn { flex: 0 0 65px; font-size: 14px; }
+  .action-buttons { gap: 6px; }
 }
 
 @media (max-width: 480px) {
-  col.col-name {
-    width: 40%;
-  }
+  col.col-name { width: 40%; }
+  col.col-size { width: 30%; }
+  col.col-actions { width: 30%; }
   
-  col.col-size {
-    width: 30%;
-  }
-  
-  col.col-actions {
-    width: 30%;
-  }
-  
-  td:first-child {
-    padding-left: 12px;
-    font-size: 14px;
-  }
-  
-  td:nth-child(2) {
-    font-size: 13px;
-    padding-left: 5px;
-  }
-  
-  td:last-child {
-    padding-right: 12px;
-  }
-  
-  .action-btn {
-    flex: 0 0 60px;
-    padding: 8px 0;
-    font-size: 13px;
-  }
+  td:first-child { padding-left: 12px; font-size: 14px; }
+  td:nth-child(2) { font-size: 13px; padding-left: 5px; }
+  td:last-child { padding-right: 12px; }
+  .action-btn { flex: 0 0 60px; font-size: 13px; }
 }
 
 @media (max-width: 360px) {
-  col.col-name {
-    width: 35%;
-  }
+  col.col-name { width: 35%; }
+  col.col-size { width: 30%; }
+  col.col-actions { width: 35%; }
   
-  col.col-size {
-    width: 30%;
-  }
-  
-  col.col-actions {
-    width: 35%;
-  }
-  
-  td:first-child {
-    padding-left: 8px;
-    font-size: 13px;
-  }
-  
-  td:nth-child(2) {
-    font-size: 12px;
-    padding-left: 3px;
-  }
-  
-  td:last-child {
-    padding-right: 8px;
-  }
-  
-  .action-btn {
-    flex: 0 0 55px;
-    padding: 7px 0;
-    font-size: 12px;
-  }
-  
-  .action-buttons {
-    gap: 4px;
-  }
+  td:first-child { padding-left: 8px; font-size: 13px; }
+  td:nth-child(2) { font-size: 12px; padding-left: 3px; }
+  td:last-child { padding-right: 8px; }
+  .action-btn { flex: 0 0 55px; font-size: 12px; }
+  .action-buttons { gap: 4px; }
 }
 </style>
 </head>
@@ -332,7 +247,7 @@ footer {
   </table>
 </main>
 
-<div id="previewPopup" onclick="if(event.target===this)this.style.display='none'">
+<div id="previewPopup">
   <div id="previewContent"></div>
 </div>
 
@@ -397,20 +312,22 @@ async function loadFiles(path='') {
 }
 
 let currentButton = null;
-async function togglePreview(btn, url, name) {
-  const popup = document.getElementById("previewPopup");
-  const content = document.getElementById("previewContent");
+let popup = document.getElementById("previewPopup");
+let content = document.getElementById("previewContent");
 
+async function togglePreview(btn, url, name) {
+  // Nếu đang mở và click cùng nút -> đóng
   if (btn === currentButton && popup.style.display === "flex") {
-    popup.style.display = "none";
-    btn.classList.remove("active");
-    content.innerHTML = "";
-    currentButton = null;
+    closePopup();
     return;
   }
 
-  if (currentButton) currentButton.classList.remove("active");
+  // Nếu đang mở nút khác -> xóa active nút cũ
+  if (currentButton) {
+    currentButton.classList.remove("active");
+  }
 
+  // Tạo nội dung preview
   const ext = name.split('.').pop().toLowerCase();
   let html = "";
 
@@ -436,6 +353,29 @@ async function togglePreview(btn, url, name) {
   btn.classList.add("active");
   currentButton = btn;
 }
+
+// Hàm đóng popup và xóa active button
+function closePopup() {
+  popup.style.display = "none";
+  content.innerHTML = "";
+  if (currentButton) {
+    currentButton.classList.remove("active");
+    currentButton = null;
+  }
+}
+
+// Đóng popup khi click RA NGOÀI previewContent
+popup.addEventListener("click", function(e) {
+  // Nếu click trực tiếp vào popup (phần nền đen) thì đóng
+  if (e.target === popup) {
+    closePopup();
+  }
+});
+
+// Ngăn sự kiện click từ content lan ra popup
+content.addEventListener("click", function(e) {
+  e.stopPropagation();
+});
 
 function escapeHtml(text) {
   return text.replace(/[&<>"']/g, m => ({
