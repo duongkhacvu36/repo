@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
 <title></title>
 
 <style>
@@ -10,72 +10,84 @@
   color-scheme: light dark;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   background: light-dark(#ffffff, #000000);
   color: light-dark(#1a2639, #f0f0f0);
   display: flex;
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
-  padding: 0; /* Xóa padding để sát mép */
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .container {
   width: 100%;
-  max-width: 100%; /* Full width */
-  padding: 0; /* Xóa padding */
+  max-width: 100%;
+  padding: 0;
 }
 
 .section-title {
   display: none;
 }
 
-/* ===== BẢNG CĂN ĐỀU 2 BÊN MÉP ===== */
+/* ===== BẢNG ===== */
 table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.95rem;
+  font-size: 16px; /* Kích thước chữ cố định cho mobile */
   margin-top: 0;
   background: light-dark(#ffffff, #0a0a0a);
-  box-shadow: none; /* Bỏ shadow để sát mép */
-  border-radius: 0; /* Bỏ bo góc */
+  border-radius: 0;
   overflow: hidden;
+  table-layout: fixed; /* Fixed layout để kiểm soát độ rộng cột */
 }
 
-th, td {
-  padding: 16px 20px; /* Tăng padding cho đẹp */
-  border-bottom: 1px solid light-dark(#eaeef2, #1a1a1a);
-  vertical-align: middle;
+/* Phân bổ độ rộng cột */
+thead, tfoot {
+  display: none;
+}
+
+/* Cột tên file - chiếm phần còn lại */
+td:first-child {
+  width: auto;
+  padding: 14px 0 14px 16px;
+  font-weight: 500;
+  color: light-dark(#1a2639, #f0f0f0);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  border-bottom: 1px solid light-dark(#eaeef2, #1a1a1a);
 }
 
-/* Cột đầu tiên - Tên file */
-td:first-child {
-  padding-left: 20px;
-  font-weight: 500;
-  color: light-dark(#1a2639, #f0f0f0);
-  max-width: none; /* Bỏ giới hạn width */
-  width: auto;
-}
-
-/* Cột thứ hai - Kích thước */
+/* Cột kích thước - width cố định */
 td:nth-child(2) {
+  width: 80px;
+  min-width: 80px;
+  max-width: 80px;
+  padding: 14px 0;
   text-align: right;
-  padding-right: 20px;
-  min-width: 100px;
-  width: 100px;
+  color: light-dark(#4a5568, #a0a0a0);
+  font-size: 14px;
+  white-space: nowrap;
+  border-bottom: 1px solid light-dark(#eaeef2, #1a1a1a);
 }
 
-/* Cột cuối cùng - Nút */
+/* Cột nút - width cố định */
 td:last-child {
+  width: 130px;
+  min-width: 130px;
+  max-width: 130px;
+  padding: 10px 16px 10px 0;
   text-align: right;
-  padding-right: 20px;
-  width: 160px; /* Tăng width cho nút */
-  min-width: 160px;
+  border-bottom: 1px solid light-dark(#eaeef2, #1a1a1a);
 }
 
 /* Xóa icon trước tên tệp */
@@ -88,25 +100,25 @@ td:first-child::before {
 .action-buttons {
   display: flex;
   justify-content: flex-end;
-  gap: 12px; /* Tăng gap */
+  gap: 8px;
   width: 100%;
 }
 
 .action-btn {
-  flex: 0 0 70px; /* Tăng width nút */
+  flex: 0 0 60px;
   text-align: center;
   padding: 8px 0;
-  border-radius: 6px;
+  border-radius: 8px;
   background: light-dark(#f0f4f8, #1a1a1a);
   color: light-dark(#0066cc, #66aaff);
   text-decoration: none;
   border: 1px solid light-dark(#d0d9e6, #333333);
   transition: all 0.2s ease;
-  font-size: 0.95rem;
-  box-sizing: border-box;
+  font-size: 15px;
   font-weight: 500;
   cursor: pointer;
   display: inline-block;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .action-btn:hover {
@@ -128,44 +140,38 @@ td:first-child::before {
   text-align: center !important;
   vertical-align: middle;
   color: light-dark(#7f8c8d, #666666);
-  padding: 60px 20px;
-  height: 60px;
-  width: 100%;
-  display: table-cell;
+  padding: 40px 20px;
   font-style: italic;
   background: light-dark(#f9f9f9, #0f0f0f);
-  font-size: 1rem;
+  font-size: 16px;
+  width: auto !important;
 }
 
-/* Popup giữ nguyên */
+/* Popup */
 #previewPopup {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  width: 100vw;
-  height: 100vh;
-  transform: translate(-50%, -50%);
-  background: rgba(0,0,0,0.85);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.95);
   display: none;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
   z-index: 1000;
-  animation: fadeIn 0.25s ease;
 }
 
 #previewContent {
   display: flex;
   align-items: center;
   justify-content: center;
-  max-width: 90%;
-  max-height: 80%;
+  width: 95%;
+  height: 90%;
   overflow: hidden;
-  border-radius: 16px;
+  border-radius: 12px;
   background: light-dark(#ffffff, #0a0a0a);
-  padding: 16px;
+  padding: 12px;
   box-sizing: border-box;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
 }
 
 #previewContent img,
@@ -176,61 +182,108 @@ td:first-child::before {
   max-height: 100%;
   object-fit: contain;
   margin: auto;
-  border-radius: 12px;
+  border-radius: 8px;
 }
 
 #previewContent pre {
   background: light-dark(#f5f5f5, #1a1a1a);
   color: light-dark(#1a2639, #e0e0e0);
-  padding: 20px;
-  border-radius: 12px;
+  padding: 16px;
+  border-radius: 8px;
   overflow-x: auto;
-  white-space: pre;
-  font-family: "Consolas", "Monaco", monospace;
-  font-size: 0.9rem;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-family: "Consolas", monospace;
+  font-size: 14px;
   border: 1px solid light-dark(#eaeef2, #333333);
-  max-height: 70vh;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  max-height: 100%;
+  width: 100%;
+  margin: 0;
 }
 
 footer {
   display: none;
 }
 
-/* Mobile */
-@media (max-width: 700px) {
-  th, td {
-    padding: 12px 16px;
+/* ===== MOBILE OPTIMIZATION ===== */
+@media (max-width: 480px) {
+  /* Tăng kích thước chạm */
+  td {
+    padding-top: 16px !important;
+    padding-bottom: 16px !important;
   }
   
+  /* Cột tên file */
   td:first-child {
-    padding-left: 16px;
+    padding-left: 12px;
+    font-size: 15px;
   }
   
+  /* Cột kích thước */
   td:nth-child(2) {
-    padding-right: 16px;
-    min-width: 80px;
-    width: 80px;
+    width: 70px;
+    min-width: 70px;
+    max-width: 70px;
+    font-size: 13px;
+    padding-right: 0;
   }
   
+  /* Cột nút */
   td:last-child {
-    padding-right: 16px;
-    width: 140px;
-    min-width: 140px;
+    width: 120px;
+    min-width: 120px;
+    max-width: 120px;
+    padding-right: 12px;
   }
   
+  /* Nút to hơn cho dễ bấm */
   .action-btn {
-    flex: 0 0 65px;
-    font-size: 0.9rem;
-    padding: 6px 0;
+    flex: 0 0 55px;
+    padding: 10px 0;
+    font-size: 14px;
+    border-radius: 10px;
   }
   
   .action-buttons {
-    gap: 8px;
+    gap: 6px;
+  }
+  
+  /* Empty state */
+  .empty {
+    padding: 50px 16px;
+    font-size: 15px;
+  }
+}
+
+/* Màn hình rất nhỏ */
+@media (max-width: 360px) {
+  td:first-child {
+    padding-left: 8px;
+    font-size: 14px;
+  }
+  
+  td:nth-child(2) {
+    width: 60px;
+    min-width: 60px;
+    max-width: 60px;
+    font-size: 12px;
+  }
+  
+  td:last-child {
+    width: 110px;
+    min-width: 110px;
+    max-width: 110px;
+    padding-right: 8px;
+  }
+  
+  .action-btn {
+    flex: 0 0 52px;
+    padding: 8px 0;
+    font-size: 13px;
+  }
+  
+  .action-buttons {
+    gap: 4px;
   }
 }
 </style>
@@ -245,7 +298,9 @@ footer {
   </table>
 </main>
 
-<div id="previewPopup"><div id="previewContent"></div></div>
+<div id="previewPopup" onclick="if(event.target===this)this.style.display='none'">
+  <div id="previewContent"></div>
+</div>
 
 <script>
 function getRepoInfo() {
@@ -330,31 +385,22 @@ async function togglePreview(btn, url, name) {
   } else if (["mp4","webm","avi","mov","mkv"].includes(ext)) {
     html = `<video src="${url}" controls autoplay></video>`;
   } else if (["pdf"].includes(ext)) {
-    html = `<iframe src="${url}" width="90%" height="80%" style="border: none;"></iframe>`;
+    html = `<iframe src="${url}" width="100%" height="100%" style="border: none;"></iframe>`;
   } else if (["txt","html","htm","php","js","css","json","md","xml","c","cpp","py","sh","bat","ini","log","conf","yml","yaml"].includes(ext)) {
     try {
       const text = await fetch(url).then(r=>r.text());
       html = `<pre>${escapeHtml(text)}</pre>`;
     } catch {
-      html = `<iframe src="${url}" width="90%" height="80%"></iframe>`;
+      html = `<iframe src="${url}" width="100%" height="100%"></iframe>`;
     }
   } else {
-    html = `<iframe src="${url}" width="90%" height="80%" style="border: none;"></iframe>`;
+    html = `<iframe src="${url}" width="100%" height="100%" style="border: none;"></iframe>`;
   }
 
   content.innerHTML = html;
   popup.style.display = "flex";
   btn.classList.add("active");
   currentButton = btn;
-
-  popup.onclick = e => {
-    if (e.target === popup) {
-      popup.style.display = "none";
-      btn.classList.remove("active");
-      content.innerHTML = "";
-      currentButton = null;
-    }
-  };
 }
 
 function escapeHtml(text) {
