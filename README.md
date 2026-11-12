@@ -1,3 +1,1 @@
 - https://duongkhacvu36.github.io/repo
-- https://www.stardesk.net
-- https://bom.so/036
